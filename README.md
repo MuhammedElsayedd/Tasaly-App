@@ -1,4 +1,4 @@
-# Tasaly-App
+# Tasaly
 Tasaly app allows the user to search for any movie he wants wo watch.
 
 <h1>Login</h1>
