@@ -1,9 +1,6 @@
 # Tasaly-App
 Tasaly app allows the user to search for any movie he wants wo watch.
 
-
-![User Login](Login.jpeg)
-.
-![Searching for a movie](search.jpeg)
-.
-![on click for details](searchDetails.jpeg)
+<img src="Login.jpeg" width="100">
+<img src="search.jpeg" width="100">
+<img src="searchDetails.jpeg" width="100">
