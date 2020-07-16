@@ -14,10 +14,13 @@ class LoginFailed: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     @IBAction func tryAgainBtn(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        
+        navigationController?.popViewController(animated: true)
+        //dismiss(animated: true, completion: nil)
     }
     
     /*

@@ -9,27 +9,42 @@
 import UIKit
 import Kingfisher
 
-class SearchViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate , UISearchBarDelegate{
+class SearchViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate , UISearchBarDelegate, UISearchControllerDelegate,UISearchResultsUpdating{
+    
+    
     
     @IBOutlet weak var romanceBtn: UIButton!
-    
     @IBOutlet weak var actionBtn: UIButton!
-    
     @IBOutlet weak var comedyBtn: UIButton!
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBarr: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     var selectedIndex = 0
+    var searchController:UISearchController!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        searchBar.delegate = self
+        
+        self.navigationController?.navigationBar.isHidden = false
+        searchController = UISearchController(searchResultsController: nil)
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        
     }
     
+    func updateSearchResults(for searchController: UISearchController) {
+        getMovies()
+    }
+    
+  
     func getMovies(){
-        getMovieList(query: searchBar.text!) { (movie, error) in
+        
+        getMovieList(query: (navigationItem.searchController?.searchBar.text)!) { (movie, error) in
             MovieModel.watch = movie
             DispatchQueue.main.async{
                 self.tableView.reloadData()
@@ -53,27 +68,13 @@ class SearchViewController: UIViewController ,UITableViewDataSource,UITableViewD
     }
     
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = true
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        getMovies()
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.endEditing(true)
-    }
-    
+   
     
 
     
     
     func getMovieList( query: String , completion: @escaping ([Movie], Error?) -> Void) {
+        
        
         let url = URL(string: "https://api.themoviedb.org/3/search/movie?api_key=e491b25f0db6d1e35955a8c7bb5cb33d" + "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")")
         let task = URLSession.shared.dataTask(with: url!) { data, response, error in
@@ -99,7 +100,7 @@ class SearchViewController: UIViewController ,UITableViewDataSource,UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // print("hahahahhahahahahahhahahahah\(MovieModel.watch.count)")
+        print("hahahahhahahahahahhahahahah\(MovieModel.watch.count)")
         return MovieModel.watch.count
     }
     

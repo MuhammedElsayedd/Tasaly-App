@@ -43,9 +43,7 @@ class DetailsViewController: UIViewController {
     }
     
 
-    @IBAction func backBtn(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
+
     /*
     // MARK: - Navigation
 

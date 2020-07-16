@@ -19,8 +19,11 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         loginButton.layer.cornerRadius = 20
         usernameTextField.delegate = self
         passwordTextField.delegate = self
-        usernameTextField.text = ""
-        passwordTextField.text = ""
+        usernameTextField.text = "MuhammedElsayedd"
+        passwordTextField.text = "iosdeveloper"
+        
+        
+        self.navigationController?.navigationBar.isHidden = true
         
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
